@@ -6,11 +6,17 @@ class destination{
   }
   display(){
     stroke(0);
-    fill(127);
+    fill(60,220,240);
     rect(this.w,0,this.w,this.r);
     rect(0,this.l,this.r,this.l);
     rect(this.w,height-this.r,this.w,this.r);
     rect(width,this.l,-this.r,this.l);
+    
+    text("North",width/2-8,this.r/2);
+    text("West",this.r/2-18,height/2);
+    text("East",width-(this.r)/2-20,height/2);
+    text("South",width/2-8,height-this.r/2);
+    
     beginShape();
     vertex(0,0);
     vertex(this.w,0);

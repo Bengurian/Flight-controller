@@ -12,8 +12,20 @@ class aeroplane{
       //console.log(navigation[random(0,8)]);
       this.col = color(231,232,54);
     }else{
-      this.position=createVector(random(height,height+200),random(width));
-      this.velocity = p5.Vector.sub(r.position,this.position).normalize();
+      let side = int(random(0,4));
+      if(side==0){
+        this.position=createVector(random(width+200),random(0,height));
+      }else if(side==1){
+        this.position=createVector(random(width),random(0,-200));
+      }else if(side==2){
+        this.position=createVector(random(width-200,width),random(0,height));
+      }else if(side==3){
+        this.position=createVector(random(0,width),random(height,height+200));
+      }
+      
+      
+      
+      this.velocity = p5.Vector.sub(r.position,this.position).normalize().setMag(0.75);
       this.takeoff=true;
       this.col = color(0,0,127);
     }
@@ -85,12 +97,12 @@ class aeroplane{
       }else if(airspace>E&&airspace<=SE){
         direction="E";
       }else if(airspace>SE&&airspace<=S){
-        dirction="SE";
+        direction="SE";
       }else if(airspace>S||airspace+360<=SW){
         direction="S";
       }else if(airspace+360>SW&&airspace+360<=W){
         direction="SW";
-      }else if(airspace+360>W&&airspace+360<=W){
+      }else if(airspace+360>W&&airspace+360<=NW){
         direction="W";
       }else if(airspace+360>NW&&airspace+360<=N+360){
         direction="NW";
@@ -115,7 +127,17 @@ class aeroplane{
   display(){
     fill(this.col);
     stroke(0);
+    if(this.hasPath){
+    line(
+      this.position.x,
+      this.position.y,
+      this.path.particles[0].position.x,
+      this.path.particles[0].position.y
+    );
+    }
+    
     circle(this.position.x,this.position.y,this.radius);
+    
     if(this.leaving==true){
       text(this.INS,this.position.x,this.position.y);
       //console.log(this.INS);
@@ -153,7 +175,7 @@ class aeroplane{
   followPath(){
       let dist = p5.Vector.sub(this.path.particles[0].position,this.position);
       if(dist.mag()>2){
-        this.velocity = dist.normalize();
+        this.velocity = dist.normalize().setMag(0.75);
         this.position.add(this.velocity);
       }
       else if(this.path.particles.length>1){

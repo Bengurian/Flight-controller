@@ -13,7 +13,19 @@ class runway{
   }
   display(){
     fill('#808080');
+    text("Landing Direction",this.position.x-40,this.position.y-20);
     rect(this.position.x,this.position.y,this.RW,this.RL);
+    
+    line(this.position.x,this.position.y,this.position.x+this.RW/2,this.position.y+10);
+    line(this.position.x+this.RW,this.position.y,this.position.x+this.RW/2,this.position.y+10);
+    
+    line(this.position.x,this.position.y+15,this.position.x+this.RW/2,this.position.y+25);
+    line(this.position.x+this.RW/2,this.position.y+25,this.position.x+this.RW,this.position.y+15);
+    line(this.position.x,this.position.y+15,this.position.x+this.RW,this.position.y+15);
+    
+    line(this.position.x,this.position.y+30,this.position.x+this.RW,this.position.y+30);
+    line(this.position.x,this.position.y+30,this.position.x+this.RW/2,this.position.y+40);
+    line(this.position.x+this.RW,this.position.y+30,this.position.x+this.RW/2,this.position.y+40);
     
   }
   update(){
@@ -23,7 +35,6 @@ class runway{
     }
   }
   checkplane(p){
-    
     if(!this.occupied&&p.landing==false){
      let hitStart = p.position.x+p.radius>=this.position.x&&p.position.x-p.radius<=this.position.x+this.RW&&p.position.y+p.radius>=this.position.y&&p.position.y-p.radius<=this.position.y;
      if(hitStart==true){

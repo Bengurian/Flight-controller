@@ -47,10 +47,10 @@ function setup() {
   
   AngleZero=createVector(0,-1);
   N=AngleZero.angleBetween(p5.Vector.sub(createVector(width/3,0),createVector(width/2,height/2)));
-  NE=AngleZero.angleBetween(p5.Vector.sub(createVector(2*width/3),createVector(width/2,height/2)));
+  NE=AngleZero.angleBetween(p5.Vector.sub(createVector(2*width/3,0),createVector(width/2,height/2)));
   E=AngleZero.angleBetween(p5.Vector.sub(createVector(width,height/3),createVector(width/2,height/2)));
   SE=AngleZero.angleBetween(p5.Vector.sub(createVector(width,2*height/3),createVector(width/2,height/2)));
-  s=AngleZero.angleBetween(p5.Vector.sub(createVector(2*width/3,height),createVector(width/2,height/2)));
+  S=AngleZero.angleBetween(p5.Vector.sub(createVector(2*width/3,height),createVector(width/2,height/2)));
   SW=AngleZero.angleBetween(p5.Vector.sub(createVector(width/3,height),createVector(width/2,height/2)))+360;
   W=AngleZero.angleBetween(p5.Vector.sub(createVector(0,2*height/3),createVector(width/2,height/2)))+360;
   NW=AngleZero.angleBetween(p5.Vector.sub(createVector(0,height/3),createVector(width/2,height/2)))+360;
@@ -58,11 +58,12 @@ function setup() {
 
 function draw() {
   background(200);
-  
-  text('Canton for SE',750,20,255);
-  text('Peking for NE',750,40,255);
-  textWidth(200)
-  textLeading(10);
+  textSize(16);
+  text("Gameplay: Use your mouse to plan the course",60,60);
+  //text('Canton for SE',750,20,255);
+  //text('Peking for NE',750,40,255);
+  //textWidth(200)
+  //textLeading(10);
   r.update();
   d.update();
   //text(lines, 70, 25);
@@ -107,6 +108,7 @@ function mouseDragged() {
   // If it's time for a new point
   if (frameCount >= nextParticleFrame&&drawPath) {
     op.createParticle();
+    op.hasPath = true;
   }
 }
 
